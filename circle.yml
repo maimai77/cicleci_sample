@@ -4,7 +4,7 @@ machine:
 
 checkout:
   post:
-    - git clone git@github.com:redmine/redmine.git -b 3.2.3
+    - git clone git@github.com:redmine/redmine.git -b 3.2.3 redmine
 
 dependencies:
   pre:
