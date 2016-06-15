@@ -7,12 +7,13 @@ machine:
 checkout:
   post:
     - git clone git@github.com:redmine/redmine.git -b 3.2.3 redmine
+    - cd redmine/plugins && ln -s ../../circle_sample
 
 dependencies:
   pre:
     - cd redmine && cp config/database.yml{.example,}
   override:
-    - cd redmine && bundle install
+    - cd redmine && bundle install --without rmagick
 
 database:
   override:
