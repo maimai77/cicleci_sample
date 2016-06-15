@@ -1,0 +1,20 @@
+machine:
+  ruby:
+    version: 2.2.4
+
+checkout:
+  post:
+    - git clone git@github.com:redmine/redmine.git -b 3.2.3
+    - cd redmine
+
+dependencies:
+  pre:
+    - cp config/database.yml{.example,}
+
+database:
+  post:
+    - bin/rake redmine:plugins:migrate
+
+test:
+  override:
+    - bin/rake redmine:plugins:test
