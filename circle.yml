@@ -5,16 +5,20 @@ machine:
 checkout:
   post:
     - git clone git@github.com:redmine/redmine.git -b 3.2.3
-    - cd redmine
 
 dependencies:
   pre:
+    - cd redmine
     - cp config/database.yml{.example,}
 
 database:
+  pre:
+    - cd redmine
   post:
     - bin/rake redmine:plugins:migrate
 
 test:
+  pre:
+    - cd redmine
   override:
     - bin/rake redmine:plugins:test
