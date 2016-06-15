@@ -1,6 +1,8 @@
 machine:
   ruby:
     version: 2.2.4
+  environment:
+    RAILS_ENV: test
 
 checkout:
   post:
@@ -14,6 +16,7 @@ dependencies:
 
 database:
   override:
+    - cd redmine && bin/rake db:create
     - cd redmine && bin/rake db:migrate
   post:
     - cd redmine && bin/rake redmine:plugins:migrate
