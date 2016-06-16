@@ -26,4 +26,4 @@ test:
   pre:
     - cd redmine && bin/rails g rspec:install
   override:
-    - cd redmine && bin/rake redmine:plugins:test
+    - cd redmine && bundle exec rspec plugins/$PLUGIN_NAME/spec
