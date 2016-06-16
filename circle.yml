@@ -13,17 +13,20 @@ checkout:
 
 dependencies:
   pre:
-    - cd redmine && cp config/database.yml{.example,}
+    - cp redmine/config/database.yml{.example,}
   override:
-    - cd redmine && bundle install --without rmagick
+    - cd redmine
+    - bundle install --without rmagick
 
 database:
   override:
-    - cd redmine && bin/rake db:create
-    - cd redmine && bin/rake db:migrate
+    - cd redmine
+    - bin/rake db:create
+    - bin/rake db:migrate
   post:
-    - cd redmine && bin/rake redmine:plugins:migrate
+    - bin/rake redmine:plugins:migrate
 
 test:
   override:
-    - cd redmine && bin/rake redmine:plugins:test
+    - cd redmine
+    - bin/rake redmine:plugins:test
