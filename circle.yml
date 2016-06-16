@@ -10,6 +10,7 @@ checkout:
   post:
     - git clone git@github.com:redmine/redmine.git -b $REDMINE_VERSION redmine
     - ln -s ~/$PLUGIN_NAME redmine/plugins/.
+    - ln -s ~/$PLUGIN_NAME/Gemfile.local redmine/.
 
 dependencies:
   pre:
@@ -22,5 +23,7 @@ database:
     - cd redmine && bin/rake db:create db:migrate redmine:plugins:migrate
 
 test:
+  pre:
+    - cd redmine && bin/rails g rspec:install
   override:
     - cd redmine && bin/rake redmine:plugins:test
