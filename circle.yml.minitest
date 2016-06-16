@@ -1,0 +1,26 @@
+machine:
+  ruby:
+    version: 2.2.4
+  environment:
+    PLUGIN_NAME: circle_sample
+    REDMINE_VERSION: 3.2.3
+    RAILS_ENV: test
+
+checkout:
+  post:
+    - git clone git@github.com:redmine/redmine.git -b $REDMINE_VERSION redmine
+    - ln -s ~/$PLUGIN_NAME redmine/plugins/.
+
+dependencies:
+  pre:
+    - cp redmine/config/database.yml{.example,}
+  override:
+    - cd redmine && bundle install --without rmagick
+
+database:
+  override:
+    - cd redmine && bin/rake db:create db:migrate redmine:plugins:migrate
+
+test:
+  override:
+    - cd redmine && bin/rake redmine:plugins:test
