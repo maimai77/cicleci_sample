@@ -9,7 +9,7 @@ machine:
 checkout:
   post:
     - git clone git@github.com:redmine/redmine.git -b $REDMINE_VERSION redmine
-    - cd redmine && ln -s ../../$PLUGIN_NAME plugins/.
+    - ln -s ~/$PLUGIN_NAME redmine/plugins/.
 
 dependencies:
   pre:
